@@ -40,22 +40,20 @@ jobs:
 
       - name: Install adaptive icon files
         run: |
-          # Adaptive icon XML (API 26+)
           mkdir -p android/app/src/main/res/mipmap-anydpi-v26
-          cp resources/android/ic_launcher/ic_launcher.xml \
-             android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
-          cp resources/android/ic_launcher/ic_launcher.xml \
+          mkdir -p android/app/src/main/res/drawable
+          mkdir -p android/app/src/main/res/values
+
+          echo '<?xml version="1.0" encoding="utf-8"?><adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android"><background android:drawable="@color/ic_launcher_background"/><foreground android:drawable="@drawable/ic_launcher_foreground"/></adaptive-icon>' \
+            > android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+
+          cp android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml \
              android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
 
-          # Foreground drawable (vector art)
-          mkdir -p android/app/src/main/res/drawable
-          cp resources/android/ic_launcher/foreground.svg \
-             android/app/src/main/res/drawable/ic_launcher_foreground.xml
+          echo '<?xml version="1.0" encoding="utf-8"?><resources><color name="ic_launcher_background">#18253d</color></resources>' \
+            > android/app/src/main/res/values/ic_launcher_background.xml
 
-          # Background color
-          mkdir -p android/app/src/main/res/values
-          cp resources/android/ic_launcher_background_color.xml \
-             android/app/src/main/res/values/ic_launcher_background.xml
+          cp icon.svg android/app/src/main/res/drawable/ic_launcher_foreground.xml
 
       - name: Decode keystore from secret
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/music-theory-release.jks
