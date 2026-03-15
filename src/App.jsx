@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { BookOpen, Music, Piano, Headphones, PenLine, Check, ExternalLink, Trophy, RotateCcw, ChevronLeft, ChevronRight, LayoutList, Library, Search } from "lucide-react";
+import { BookOpen, Music, Music2, Headphones, PenLine, Check, ExternalLink, Trophy, RotateCcw, ChevronLeft, ChevronRight, LayoutList, Library, Search } from "lucide-react";
 
 // ── TRACK CONFIG ─────────────────────────────────────────────────────────────
 const TRACKS = [
   { key: "theory",      label: "Theory",       icon: BookOpen,    color: "#1c4a8a", bg: "#eef3fc", border: "#c5d6f5" },
   { key: "score",       label: "Score Study",  icon: Music,       color: "#7a4520", bg: "#fdf4ec", border: "#e8cdb0" },
-  { key: "keyboard",    label: "Keyboard",     icon: Piano,       color: "#1a5e38", bg: "#ecf8f2", border: "#aedbca" },
+  { key: "keyboard",    label: "Keyboard",     icon: Music2,      color: "#1a5e38", bg: "#ecf8f2", border: "#aedbca" },
   { key: "ear",         label: "Ear Training", icon: Headphones,  color: "#5a2d80", bg: "#f5eeff", border: "#d0b8f0" },
   { key: "composition", label: "Composition",  icon: PenLine,     color: "#8a1c35", bg: "#fdedf1", border: "#e8b8c8" },
 ];
