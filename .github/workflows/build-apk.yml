@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          # No cache: key - we don't commit a lock file
 
       - name: Install dependencies
         run: npm install
@@ -39,48 +38,31 @@ jobs:
       - name: Sync web assets to Android
         run: npx cap sync android
 
-      - name: Copy adaptive icon layers
+      - name: Install adaptive icon files
         run: |
-          MIPMAP_DIRS="android/app/src/main/res/mipmap-anydpi-v26"
-          mkdir -p "$MIPMAP_DIRS"
+          # Adaptive icon XML (API 26+)
+          mkdir -p android/app/src/main/res/mipmap-anydpi-v26
+          cp resources/android/ic_launcher/ic_launcher.xml \
+             android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+          cp resources/android/ic_launcher/ic_launcher.xml \
+             android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
 
-          # Write adaptive icon XML referencing foreground + background drawables
-          cat > "$MIPMAP_DIRS/ic_launcher.xml" << 'XMLEOF'
-          <?xml version="1.0" encoding="utf-8"?>
-          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-            <background android:drawable="@drawable/ic_launcher_background"/>
-            <foreground android:drawable="@drawable/ic_launcher_foreground"/>
-          </adaptive-icon>
-          XMLEOF
-
-          cat > "$MIPMAP_DIRS/ic_launcher_round.xml" << 'XMLEOF'
-          <?xml version="1.0" encoding="utf-8"?>
-          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-            <background android:drawable="@drawable/ic_launcher_background"/>
-            <foreground android:drawable="@drawable/ic_launcher_foreground"/>
-          </adaptive-icon>
-          XMLEOF
-
-          # Copy SVG layers into drawable
+          # Foreground drawable (vector art)
           mkdir -p android/app/src/main/res/drawable
           cp resources/android/ic_launcher/foreground.svg \
-             android/app/src/main/res/drawable/ic_launcher_foreground.xml 2>/dev/null || \
-          cp resources/android/ic_launcher/foreground.svg \
-             android/app/src/main/res/drawable/ic_launcher_foreground.svg
+             android/app/src/main/res/drawable/ic_launcher_foreground.xml
 
-          cp resources/android/ic_launcher/background.svg \
-             android/app/src/main/res/drawable/ic_launcher_background.xml 2>/dev/null || \
-          cp resources/android/ic_launcher/background.svg \
-             android/app/src/main/res/drawable/ic_launcher_background.svg
+          # Background color
+          mkdir -p android/app/src/main/res/values
+          cp resources/android/ic_launcher_background_color.xml \
+             android/app/src/main/res/values/ic_launcher_background.xml
 
       - name: Decode keystore from secret
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/music-theory-release.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/music-theory-release.jks
 
       - name: Configure signing in build.gradle
         run: |
           cat >> android/app/build.gradle << 'GRADLEOF'
-
           android {
             signingConfigs {
               release {
@@ -105,14 +87,10 @@ jobs:
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        run: |
-          cd android
-          ./gradlew assembleRelease --no-daemon
+        run: cd android && ./gradlew assembleRelease --no-daemon
 
       - name: Build debug APK
-        run: |
-          cd android
-          ./gradlew assembleDebug --no-daemon
+        run: cd android && ./gradlew assembleDebug --no-daemon
 
       - name: Upload signed release APK
         uses: actions/upload-artifact@v4
