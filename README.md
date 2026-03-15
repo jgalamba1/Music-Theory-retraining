@@ -1,37 +1,43 @@
 # Music Theory Program
 
-A self-study curriculum tracker for music theory, covering five stages from tonal grammar through extended harmony. Built with React + Vite, packaged for Android via Capacitor.
-
-## Features
-
-- Five-stage curriculum (18–24 months at 10–15 hrs/week)
-- Five concurrent tracks: Theory, Score Study, Keyboard, Ear Training, Composition
-- Cross-track concurrent task indicators — see what to practice simultaneously
-- Collapsible sidebar and header
-- Progress tracking persisted to localStorage
-- Milestones & self-assessment checkpoints
-- Appendix: 80+ annotated theory books and treatises, filterable by topic
+A self-study curriculum tracker for music theory — five stages from tonal grammar through extended harmony, with concurrent track navigation, a theory library appendix, and cross-reference search. Built with React + Vite, packaged for Android via Capacitor 6.
 
 ---
 
-## Getting the APK (GitHub Actions — no local Android SDK needed)
+## Getting the APK via GitHub Actions
 
-1. Create a GitHub repository and push this project:
-   ```bash
-   git init
-   git add -A
-   git commit -m "initial commit"
-   git remote add origin https://github.com/YOUR_USERNAME/music-theory-program.git
-   git push -u origin main
-   ```
+### 1. Add GitHub Secrets
 
-2. Go to the **Actions** tab in your repository.
+Before pushing, add these three secrets to your repository:
+**Settings → Secrets and variables → Actions → New repository secret**
 
-3. The workflow runs automatically on push. Wait ~5–8 minutes.
+| Secret name | Value |
+|---|---|
+| `KEYSTORE_BASE64` | Base64-encoded `.jks` file (see keystore instructions below) |
+| `KEYSTORE_PASSWORD` | `MusicTheory2024!` |
+| `KEY_ALIAS` | `music-theory-key` |
 
-4. When complete, click the workflow run → scroll to **Artifacts** → download **music-theory-debug**.
+The `.jks` keystore file was generated alongside this project. To get its base64 value:
+```bash
+base64 -w 0 music-theory-release.jks
+```
+Paste the entire output as the `KEYSTORE_BASE64` secret value.
 
-5. Transfer the APK to your Android device and install it (you may need to enable "Install from unknown sources" in Settings → Security).
+### 2. Push to GitHub
+
+```bash
+git init
+git add -A
+git commit -m "initial commit"
+git remote add origin https://github.com/YOUR_USERNAME/music-theory-program.git
+git push -u origin main
+```
+
+### 3. Download the APK
+
+Go to the **Actions** tab → click the workflow run → scroll to **Artifacts** → download **music-theory-release-signed**.
+
+The signed APK can be sideloaded directly and will support over-the-air upgrades without uninstalling, because every build uses the same keystore.
 
 ---
 
@@ -39,28 +45,16 @@ A self-study curriculum tracker for music theory, covering five stages from tona
 
 ```bash
 npm install
-npm run dev        # Start dev server at http://localhost:5173
-npm run build      # Build web assets to dist/
-```
-
-## Local Android Build (requires Android Studio + SDK)
-
-```bash
-npm install
-npm run build
-npx cap add android
-npx cap sync android
-npx cap open android   # Opens in Android Studio — build from there
+npm run dev      # http://localhost:5173
+npm run build    # builds to dist/
 ```
 
 ---
 
-## Signing for Google Play
+## Icon Notes
 
-To sign the release APK for distribution:
+The icon uses Android adaptive icon architecture (API 26+):
+- **Foreground layer** (`resources/android/ic_launcher/foreground.svg`) — treble clef + quill pen artwork, constrained to the central 66% safe zone
+- **Background layer** (`resources/android/ic_launcher/background.svg`) — solid navy `#18253d`
 
-```bash
-keytool -genkey -v -keystore music-theory.jks -alias music-theory -keyalg RSA -keysize 2048 -validity 10000
-```
-
-Then add signing config to `android/app/build.gradle` and add your keystore secrets to GitHub → Settings → Secrets and variables → Actions.
+Android clips each layer independently to its icon shape (circle, squircle, etc.) — the artwork is never cropped.

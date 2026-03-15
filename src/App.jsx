@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { BookOpen, Music, Piano, Headphones, PenLine, Check, ExternalLink, Trophy, RotateCcw, ChevronLeft, ChevronRight, LayoutList, Library } from "lucide-react";
+import { BookOpen, Music, Piano, Headphones, PenLine, Check, ExternalLink, Trophy, RotateCcw, ChevronLeft, ChevronRight, LayoutList, Library, Search } from "lucide-react";
 
 // ── TRACK CONFIG ─────────────────────────────────────────────────────────────
 const TRACKS = [
@@ -98,6 +98,7 @@ const STAGES = [
         { id: "s1_er_1", text: "Score-to-sound mapping: follow a Bach invention recording while tracking your Roman numeral analysis" },
         { id: "s1_er_2", text: "Track modulations in binary forms: identify key area at each section's close by ear" },
         { id: "s1_er_3", text: "Sing all 4 voices through 50 Bach chorales from Riemenschneider" },
+        { id: "s1_er_4", text: "4-part SATB dictation review: once per week, take down a 4–8 bar chorale phrase from a recording of the Riemenschneider set (no score). Notate all four voices, then check against score.", note: "You are good at this but likely rusty. The goal is not to develop the skill from scratch but to restore fluency — expect it to come back quickly. Use chorales already studied in the theory track so harmonic context is familiar." },
       ],
       composition: [
         { id: "s1_co_0", text: "Harmonize 50 Bach chorales on paper (Riemenschneider ed., before consulting Bach)" },
@@ -152,6 +153,7 @@ const STAGES = [
         { id: "s2_er_1", text: "Identify Neapolitan 6th, Italian 6th, French 6th, and German 6th by sound" },
         { id: "s2_er_2", text: "Score-to-sound: follow one Haydn quartet movement per week with Roman numeral annotations" },
         { id: "s2_er_3", text: "Listen to each assigned symphony with a tonal map in hand; track formal sections in real time" },
+        { id: "s2_er_4", text: "4-part SATB dictation: increase to 8–16 bar phrases from Haydn and Mozart string quartets (inner parts only — no outer voice given). Notate all four parts, then verify against score.", note: "This step shifts dictation from chorale to instrumental texture. The rhythmic independence of the inner voices in quartet writing is more demanding than chorale homophony — the skill transfers directly to analytical hearing of Classical chamber music." },
       ],
       composition: [
         { id: "s2_co_0", text: "Compose 3 binary movements in minuet style (vary first-section cadence: V, vi, and III endings)", note: "Different handling of the return in each." },
@@ -160,6 +162,7 @@ const STAGES = [
         { id: "s2_co_3", text: "Compose 1 movement in simple rondo form (ABACA + coda)" },
         { id: "s2_co_4", text: "Compose 1 sonata-rondo movement" },
         { id: "s2_co_5", text: "Compose 1 slow movement in sonata form (piano sketch)", note: "Slow movements are formally simpler. Start here before the allegro." },
+        { id: "s2_co_5b", text: "Small Forms — Transition & Retransition studies: compose 3 isolated transition passages (16–24 bars each) moving to the dominant, and 3 retransition passages restoring the tonic. Then compose one complete ABA ternary piece in which the A-to-B transition and B-to-A retransition are the primary compositional challenge.", note: "Caplin: a transition must dissolve the home key and generate momentum; a retransition must suspend forward motion and create expectation. Master both in the small container of ternary form before committing them to the longer time-spans of a sonata allegro." },
         { id: "s2_co_6", text: "Compose 1 allegro first movement in sonata form", note: "The capstone of Stage Three. Apply all three formal theories to your own work." },
       ],
     },
@@ -201,6 +204,7 @@ const STAGES = [
         { id: "s3_er_1", text: "Identify augmented sixth chord types by sound in orchestral contexts (Brahms, Schubert)" },
         { id: "s3_er_2", text: "Listen to the Wagner Tristan Prelude on repeat with score until each chromatic gesture is anticipated, not merely recognized" },
         { id: "s3_er_3", text: "Score-to-sound: Brahms Symphony No.4 with tonal annotations; track the passacaglia variations by ear" },
+        { id: "s3_er_4", text: "4-part chromatic dictation: take down 8–16 bar passages from Brahms piano intermezzi or chamber music in which at least one chromatic chord (augmented sixth, Neapolitan, chromatic mediant) appears per phrase.", note: "The goal is to hear chromatic voice-leading in real time — not just identify chord types in isolation, but hear the voice that moves by half-step and the harmonic destination it implies. This directly supports the Tristan analysis work in the theory and score-study tracks." },
       ],
       composition: [
         { id: "s3_co_0", text: "Compose a short piano piece using at least one chromatic modulation to a distant key", note: "The piece should return to the tonic by a different route than it departed." },
@@ -269,6 +273,7 @@ const MILESTONES = [
   { month: 10, name: "Fugue (3 voices): compose",        test: "Complete a three-voice fugue. Subject and countersubject should work in double counterpoint." },
   { month: 10, name: "Sonata form: slow movement",       test: "Complete a slow movement in sonata form with primary theme, secondary theme, development, and recapitulation." },
   { month: 10, name: "Modulation recognition by ear",    test: "Identify the secondary key area and its approach in 10 consecutive sonata expositions from recordings, without score." },
+  { month: 11, name: "Small Forms: transition & retransition", test: "Complete 3 transition and 3 retransition passages independently. Then complete an ABA ternary piece in which the formal boundary moments (transition, retransition) are the primary compositional concern. Each formal function should be identifiable without labeling." },
   { month: 12, name: "Sonata form: allegro movement",    test: "Complete an allegro first movement. The development should contain at least one sequence and one retransition." },
   { month: 12, name: "Partitura realization",            test: "Realize a Baroque trio sonata continuo part from bass line and figures at keyboard, with appropriate inner voices." },
   { month: 15, name: "Extended harmony: analytic",       test: "Write a harmonic analysis of the Debussy String Quartet, first movement, identifying specific techniques by name." },
@@ -426,6 +431,9 @@ const LIBRARY_TOPICS = [
   { key: "posttonal",    label: "Post-Tonal Theory" },
   { key: "aesthetics",   label: "Style, History & Aesthetics" },
   { key: "craft",        label: "Composition & Craft" },
+  { key: "cogacoustics", label: "Philosophy, Cognition & Acoustics" },
+  { key: "beyond",       label: "Beyond the Program" },
+  { key: "jazz",         label: "Jazz Theory" },
 ];
 
 const LIBRARY = [
@@ -681,6 +689,108 @@ const LIBRARY = [
   { id:"lb_cc_6", topic:"craft", era:"Contemporary",
     author:"David Lewin", title:"Generalized Musical Intervals and Transformations", year:"1987",
     note:"The foundational text of transformational theory. Reconceives musical relations not as measurements between objects but as actions performed by a virtual agent. Dense and mathematically demanding but intellectually transformative." },
+
+  // ── PHILOSOPHY, COGNITION & ACOUSTICS ───────────────────────────────────
+  { id:"lb_ca_0", topic:"cogacoustics", era:"Romantic",
+    author:"Hermann von Helmholtz", title:"On the Sensations of Tone", year:"1863",
+    note:"The founding work of musical acoustics as a scientific discipline. Helmholtz investigates the physics of sound, the anatomy of hearing, and the psychoacoustics of consonance and dissonance — deriving harmonic phenomena from the behavior of overtone series. Rameau's fundamental bass, the interval hierarchy, and the origin of tonality are all grounded here in acoustic reality. Essential background for understanding why Rameau's theory works and where it breaks down." },
+  { id:"lb_ca_1", topic:"cogacoustics", era:"Romantic",
+    author:"Edmund Gurney", title:"The Power of Sound", year:"1880",
+    note:"The most serious Victorian philosophy of music. Gurney resists both pure formalism (Hanslick) and crude emotionalism, arguing that musical value resides in the specific 'ideal motion' of melodic form — a phenomenological account that anticipates later cognitive approaches. Underread and rewarding." },
+  { id:"lb_ca_2", topic:"cogacoustics", era:"Modern",
+    author:"Victor Zuckerkandl", title:"Sound and Symbol: Music and the External World", year:"1956",
+    note:"A philosopher's account of what it means to hear music — specifically, what kind of reality tones inhabit. Zuckerkandl argues that tonal hearing is a form of genuine perception of dynamic qualities in the world, not a projection onto neutral sound. His account of melodic motion and harmonic tension as objective rather than subjective phenomena is a valuable corrective to purely formalist or purely emotivist theories. Accessible and beautifully written." },
+  { id:"lb_ca_3", topic:"cogacoustics", era:"Modern",
+    author:"Leonard Meyer", title:"Emotion and Meaning in Music", year:"1956",
+    note:"A foundational account of musical expectation, implication, and realization. Bridges music theory and cognitive psychology; shaped how a generation of analysts thought about tension and release. Already listed under Aesthetics — central to both categories." },
+  { id:"lb_ca_4", topic:"cogacoustics", era:"Contemporary",
+    author:"John Sloboda", title:"The Musical Mind", year:"1985",
+    note:"The first serious cognitive psychology of music. Covers musical representation, performance, improvisation, and development from an information-processing perspective. Grounded in empirical research rather than philosophical speculation; a useful corrective to the more abstract accounts in this section." },
+  { id:"lb_ca_5", topic:"cogacoustics", era:"Contemporary",
+    author:"Fred Lerdahl & Ray Jackendoff", title:"A Generative Theory of Tonal Music", year:"1983",
+    note:"Applies Chomskyan linguistics to tonal music, deriving hierarchical metrical and grouping structures from preference rules. Already listed under Composition & Craft — belongs equally here as the most rigorous cognitive music theory in the literature." },
+  { id:"lb_ca_6", topic:"cogacoustics", era:"Contemporary",
+    author:"David Huron", title:"Sweet Anticipation: Music and the Psychology of Expectation", year:"2006",
+    note:"The most comprehensive modern account of musical expectation and its emotional consequences. Huron's ITPRA theory (Imagination, Tension, Prediction, Reaction, Appraisal) provides a psychologically grounded framework for understanding why tonal syntax creates emotional effects. Directly relevant to understanding how functional harmony exploits and violates listener expectation — makes explicit what Aldwell & Schachter teach implicitly." },
+  { id:"lb_ca_7", topic:"cogacoustics", era:"Contemporary",
+    author:"Nicholas Cook", title:"Music, Imagination, and Culture", year:"1990",
+    note:"A carefully argued critique of both formalist and cognitive approaches to music. Cook examines how listeners actually perceive large-scale musical structure (finding that most don't perceive the structural spans that analysts describe) and draws uncomfortable but important conclusions about the relationship between theoretical analysis and musical experience." },
+  { id:"lb_ca_8", topic:"cogacoustics", era:"Contemporary",
+    author:"Diana Deutsch (ed.)", title:"The Psychology of Music", year:"1982",
+    note:"The standard reference anthology for music psychology. Covers pitch perception, melodic and harmonic organization, rhythm, meter, musical ability, and performance. Used as a reference rather than read cover to cover; invaluable for grounding theoretical claims in perceptual reality." },
+  { id:"lb_ca_9", topic:"cogacoustics", era:"Contemporary",
+    author:"Richard Parncutt", title:"Harmony: A Psychoacoustical Approach", year:"1989",
+    note:"Applies Terhardt's virtual pitch theory to harmonic perception — deriving root-finding, chord hierarchy, and tonal tension directly from the psychoacoustics of complex tones. Bridges Helmholtz's acoustics and the cognitive accounts of Lerdahl and Huron. Technically demanding but rewards the effort with a genuine grounding of harmonic syntax in auditory physiology." },
+  { id:"lb_ca_10", topic:"cogacoustics", era:"Contemporary",
+    author:"Carol Krumhansl", title:"Cognitive Foundations of Musical Pitch", year:"1990",
+    note:"The most consequential empirical work in music cognition. Krumhansl's probe-tone experiments establish tonal hierarchy quantitatively — demonstrating that listeners internalize a graded stability structure in which tonic triad tones are perceptually more stable than diatonic scale tones, which are more stable than chromatic tones. This hierarchy shapes melodic expectation, harmonic tension, and key-finding. The empirical bedrock on which Huron, Lerdahl's later theoretical work, and Parncutt all build. Should be read alongside Meyer." },
+  { id:"lb_ca_11", topic:"cogacoustics", era:"Contemporary",
+    author:"W. Jay Dowling & Darrell Harwood", title:"Music Cognition", year:"1986",
+    note:"A rigorous and comprehensive empirical cognitive psychology of music. Covers pitch perception, melodic memory, interval and contour processing, harmony, rhythm, and meter through controlled experimental research. Less philosophically ambitious than Meyer or Huron but more systematically grounded in experimental results. Best used as a reference alongside the Deutsch anthology — between them they cover the experimental literature through the 1980s." },
+  { id:"lb_ca_12", topic:"cogacoustics", era:"Contemporary",
+    author:"Bob Snyder", title:"Music and Memory", year:"2000",
+    note:"Applies cognitive memory research — echoic memory, short-term (event) memory, and long-term memory — directly to musical structure. Explains why phrase lengths cluster around 3–8 seconds (the span of short-term auditory storage), why certain formal units are perceivable as unified events and others are not, and how long-term memory shapes tonal and formal expectation. Answers questions that formal theory raises but cannot answer from within: why do these particular structural spans feel like units?" },
+  { id:"lb_ca_13", topic:"cogacoustics", era:"Contemporary",
+    author:"Aniruddh Patel", title:"Music, Language, and the Brain", year:"2008",
+    note:"The most neuroscientifically grounded account of musical cognition currently available. Covers the music-language interface (syntactic processing, the ERAN response to harmonic violations, shared neural resources), pitch and melody, rhythm and meter, and musical meaning. Patel's OPERA hypothesis — that music exercises the neural substrates of linguistic processing — has direct implications for why musical training affects language perception. Essential for understanding what the brain is doing during the ear training and score-study work throughout this program." },
+
+  // ── BEYOND THE PROGRAM ───────────────────────────────────────────────────
+  // These works point toward musical territories the program does not enter.
+  // They are listed not as assigned reading but as natural continuations for
+  // anyone who has completed or is advancing through Stage Five.
+
+  // — Rhythmic Complexity & Metric Modulation —
+  { id:"lb_bx_0", topic:"beyond", era:"Contemporary",
+    author:"Jonathan Bernard", title:"The Music of Edgard Varèse", year:"1987",
+    note:"The analytical entry point into Varèse's pitch-space and rhythmic language — the earliest serious engagement with rhythm as a primary structural parameter rather than a vehicle for pitch events. Varèse is the missing figure between Stravinsky's rhythmic primitivism and the metric complexity of Carter and Ligeti." },
+  { id:"lb_bx_1", topic:"beyond", era:"Contemporary",
+    author:"Elliott Carter", title:"Harmony Book", year:"2002",
+    note:"Carter's own systematic account of his harmonic language: an all-interval tetrachord-based system developed over decades of practice. Terse and demanding but irreplaceable as a primary source. Read alongside the String Quartets 2–5 and the Double Concerto." },
+  { id:"lb_bx_2", topic:"beyond", era:"Contemporary",
+    author:"Link, Jonathan & Boland, Marguerite (eds.)", title:"Elliott Carter Studies", year:"2012",
+    note:"A collection of analytic essays covering metric modulation, all-interval harmony, and formal processes across Carter's output. More accessible than the Harmony Book as a starting point; the essays on metric modulation are the best available introduction to that technique." },
+  { id:"lb_bx_3", topic:"beyond", era:"Contemporary",
+    author:"Ligeti, György", title:"György Ligeti in Conversation", year:"1983",
+    note:"Ligeti's most extended self-commentary — on micropolyphony, the piano études, his engagement with Conlon Nancarrow's player-piano polyrhythms, and his evolving relationship to tonality. A necessary companion to score study; Ligeti's own descriptions of his technical aims are more illuminating than most secondary analysis." },
+  { id:"lb_bx_4", topic:"beyond", era:"Contemporary",
+    author:"Steinitz, Richard", title:"György Ligeti: Music of the Imagination", year:"2003",
+    note:"The standard English-language monograph. Strong analytical coverage of the orchestral works, the string quartets, and the piano études — the last of which synthesize African polyrhythm, Nancarrow's metric complexity, and post-tonal harmonic practice into some of the most technically and analytically demanding piano music of the century." },
+
+  // — Minimalism —
+  { id:"lb_bx_5", topic:"beyond", era:"Contemporary",
+    author:"Keith Potter", title:"Four Musical Minimalists", year:"2000",
+    note:"The most comprehensive analytic study of Riley, Young, Glass, and Reich. The chapters on Reich are especially strong: Potter traces the development of phasing, additive process, and harmonic stasis from the tape pieces through Music for 18 Musicians and beyond. Essential for understanding how minimalism retheorizes repetition, pulse, and tonal stasis as compositional resources." },
+  { id:"lb_bx_6", topic:"beyond", era:"Contemporary",
+    author:"Steve Reich", title:"Writings on Music 1965–2000", year:"2002",
+    note:"Reich's collected essays and process notes. 'Music as a Gradual Process' (1968) is the foundational manifesto of process music; the later essays show how his thinking evolved toward harmonic richness and rhythmic complexity in the mature works. Short, direct, and indispensable." },
+  { id:"lb_bx_7", topic:"beyond", era:"Contemporary",
+    author:"Robert Fink", title:"Repeating Ourselves: American Minimal Music as Cultural Practice", year:"2005",
+    note:"A cultural and analytic study that situates minimalism within broader American consumer culture and advertising aesthetics. More controversial than Potter but raises important questions about why minimalism sounds the way it does and what social functions musical repetition serves." },
+
+  // — Spectralism —
+  { id:"lb_bx_8", topic:"beyond", era:"Contemporary",
+    author:"Murail, Tristan", title:"Target Practice (collected writings, tr. Joshua Cody)", year:"2005",
+    note:"Murail's theoretical essays on spectral composition: the use of the harmonic series and acoustic models of sound as compositional material rather than stylistic reference. 'Spectra and Pixies' and 'The Revolution of Complex Sounds' are the essential texts. The direct link between Helmholtz's acoustics, already in this library, and spectral composition practice becomes apparent here." },
+  { id:"lb_bx_9", topic:"beyond", era:"Contemporary",
+    author:"Fineberg, Joshua (ed.)", title:"Spectral Music: History and Techniques", year:"2000",
+    note:"A double issue of Contemporary Music Review collecting historical, theoretical, and compositional perspectives on spectralism. Includes texts by Grisey, Murail, Levinas, and others. The best single anthology for entering this repertoire analytically." },
+  { id:"lb_bx_10", topic:"beyond", era:"Contemporary",
+    author:"Grisey, Gérard", title:"'Tempus ex Machina: A Composer's Reflections on Musical Time'", year:"1987",
+    note:"Grisey's account of his temporal philosophy — the spectrum of time from 'smooth' to 'striated,' and the relationship between acoustic envelope, spectral structure, and formal duration. One of the most original theoretical texts of the late twentieth century; connects Helmholtz and Parncutt to living compositional practice." },
+
+  // — Jazz Theory —
+  { id:"lb_bx_11", topic:"jazz", era:"Contemporary",
+    author:"Mark Levine", title:"The Jazz Theory Book", year:"1995",
+    note:"The standard professional jazz theory reference. Covers chord-scale relationships, reharmonization, modal jazz, bebop language, and rhythm changes with comprehensiveness and practical clarity. The harmonic vocabulary is entirely distinct from common-practice theory — extended tertian chords used as color rather than tendency, voice-leading governed by the melodic line rather than resolution — and engaging with it illuminates the functional tonal system by contrast. Start here." },
+  { id:"lb_bx_12", topic:"jazz", era:"Contemporary",
+    author:"Robert Rawlins & Nor Eddine Bahha", title:"Jazzology: The Encyclopedia of Jazz Theory for All Musicians", year:"2005",
+    note:"More systematic and textbook-like than Levine; covers melody, harmony, rhythm, and form with explicit attention to the underlying theoretical principles rather than just the formulas. Useful as a reference alongside Levine." },
+  { id:"lb_bx_13", topic:"jazz", era:"Contemporary",
+    author:"Henry Martin", title:"Charlie Parker and Thematic Improvisation", year:"1996",
+    note:"An analytic study of bebop improvisation as motivic and thematic process — demonstrating that Parker's solos have internal coherence of the kind Schoenberg attributed to developing variation. The theoretical bridge between the jazz and classical analytic traditions." },
+  { id:"lb_bx_14", topic:"jazz", era:"Contemporary",
+    author:"Dmitri Tymoczko", title:"A Geometry of Music", year:"2011",
+    note:"A unified geometric theory of voice-leading that covers common-practice tonality, jazz harmony, and twentieth-century scalar music within a single mathematical framework. Orbifold geometry represents chord progressions as paths through a multidimensional space; efficient voice-leading corresponds to short paths. Genuinely original and applicable across the full range of tonal and post-tonal music. The most ambitious theoretical synthesis since Schenker." },
 ];
 
 // ── STORAGE HELPERS ──────────────────────────────────────────────────────────
@@ -715,6 +825,7 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [headerCollapsed, setHeaderCollapsed] = useState(false);
   const [highlightedTask, setHighlightedTask] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const scrollRef = useRef(null);
   const lastScrollY = useRef(0);
 
@@ -869,6 +980,29 @@ export default function App() {
         .sb-reset:hover{color:#7a9bb8}
         .sb-reset-label{transition:opacity .2s}
         .sidebar.closed .sb-reset-label{opacity:0;width:0;overflow:hidden}
+
+        /* Search */
+        .sb-search-wrap{padding:8px 10px 6px;border-top:1px solid rgba(255,255,255,.06)}
+        .sidebar.closed .sb-search-wrap{padding:8px 6px 6px;display:flex;justify-content:center}
+        .sb-search-inner{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border-radius:5px;padding:5px 8px;border:1px solid rgba(255,255,255,.06);transition:border-color .15s}
+        .sb-search-inner:focus-within{border-color:rgba(176,120,40,.5)}
+        .sidebar.closed .sb-search-inner{padding:5px;justify-content:center;width:30px;height:30px;border-radius:50%}
+        .sb-search-input{flex:1;background:none;border:none;outline:none;font-family:'EB Garamond',Georgia,serif;font-size:12px;color:#ddd4c0;min-width:0}
+        .sb-search-input::placeholder{color:#344a68}
+        .sidebar.closed .sb-search-input{display:none}
+
+        /* Search results view */
+        .srch-wrap{flex:1;overflow-y:auto;padding:24px 32px}
+        .srch-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#18253d;margin-bottom:4px}
+        .srch-sub{font-size:13px;color:#9a9082;margin-bottom:20px}
+        .srch-section{margin-bottom:24px}
+        .srch-section-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-weight:600;color:#18253d;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #d8d0c4}
+        .srch-result{display:flex;gap:10px;padding:9px 11px;border-radius:5px;cursor:pointer;border:1px solid transparent;transition:background .12s;align-items:flex-start;margin-bottom:3px}
+        .srch-result:hover{background:#ede6d4;border-color:#d8d0c4}
+        .srch-badge{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+        .srch-text{font-size:13px;color:#26200e;line-height:1.5}
+        .srch-note{font-size:11.5px;color:#9a9082;font-style:italic;line-height:1.5;margin-top:2px}
+        .srch-empty{font-size:13px;color:#9a9082;font-style:italic;padding:20px 0}
 
         /* ─── Main ─── */
         .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
@@ -1111,6 +1245,22 @@ export default function App() {
               <RotateCcw size={11} style={{ flexShrink: 0 }} />
               {sidebarOpen && <span className="sb-reset-label">Reset all progress</span>}
             </div>
+
+            {/* Search */}
+            <div className="sb-search-wrap">
+              <div className="sb-search-inner"
+                onClick={() => { if (!sidebarOpen) { setSidebarOpen(true); } }}
+                title={!sidebarOpen ? "Search" : undefined}>
+                <Search size={11} style={{ color: "#5a7099", flexShrink: 0 }} />
+                <input
+                  className="sb-search-input"
+                  placeholder="Search tasks & library…"
+                  value={searchQuery}
+                  onChange={e => { setSearchQuery(e.target.value); if (e.target.value) setView("search"); else if (view === "search") setView("stage"); }}
+                  onFocus={() => { if (searchQuery) setView("search"); }}
+                />
+              </div>
+            </div>
           </nav>
         </aside>
 
@@ -1120,6 +1270,11 @@ export default function App() {
             <MilestonesView />
           ) : view === "library" ? (
             <LibraryView />
+          ) : view === "search" ? (
+            <SearchView query={searchQuery} onNavigateTask={(stageIdx, track, taskId) => {
+              setActiveStage(stageIdx); setActiveTrack(track); setView("stage");
+              setTimeout(() => setHighlightedTask(taskId), 80);
+            }} onNavigateLibrary={() => setView("library")} />
           ) : (
             <>
               {/* Stage header — collapses on scroll down, expands on scroll up */}
@@ -1317,6 +1472,101 @@ function LibraryView() {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// Normalize for search: lowercase + strip diacritics so "Dvorak" finds "Dvořák"
+function norm(str) {
+  return String(str).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function SearchView({ query, onNavigateTask, onNavigateLibrary }) {
+  const q = norm(query);
+  if (!q.trim()) return (
+    <div className="srch-wrap">
+      <div className="srch-title">Search</div>
+      <div className="srch-empty">Start typing in the search box to find tasks and library entries.</div>
+    </div>
+  );
+
+  // Search tasks
+  const taskResults = [];
+  STAGES.forEach((stage, stageIdx) => {
+    TRACKS.forEach(track => {
+      const tasks = stage.tracks[track.key] || [];
+      tasks.forEach(task => {
+        if (norm(task.text).includes(q) || (task.note && norm(task.note).includes(q))) {
+          taskResults.push({ stage, stageIdx, track, task });
+        }
+      });
+    });
+  });
+
+  // Search library
+  const libResults = LIBRARY.filter(b =>
+    norm(b.title).includes(q) ||
+    norm(b.author).includes(q) ||
+    norm(b.note).includes(q) ||
+    norm(b.era).includes(q)
+  );
+
+  const total = taskResults.length + libResults.length;
+
+  return (
+    <div className="srch-wrap">
+      <div className="srch-title">Search results</div>
+      <div className="srch-sub">{total} result{total !== 1 ? "s" : ""} for "{query}"</div>
+
+      {taskResults.length > 0 && (
+        <div className="srch-section">
+          <div className="srch-section-head">Curriculum Tasks ({taskResults.length})</div>
+          {taskResults.map(({ stage, stageIdx, track, task }) => {
+            return (
+              <div key={task.id} className="srch-result"
+                onClick={() => onNavigateTask(stageIdx, track.key, task.id)}>
+                <span className="srch-badge"
+                  style={{ background: track.bg, color: track.color, border: `1px solid ${track.border}` }}>
+                  {track.label}
+                </span>
+                <div>
+                  <div className="srch-text">{task.text}</div>
+                  <div style={{ fontSize: 11, color: "#9a9082", marginTop: 2 }}>
+                    Stage {stage.number}: {stage.title}
+                  </div>
+                  {task.note && <div className="srch-note">{task.note}</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {libResults.length > 0 && (
+        <div className="srch-section">
+          <div className="srch-section-head">Library ({libResults.length})</div>
+          {libResults.map(book => {
+            const eraStyle = ERA_COLORS[book.era] || { bg:"#f0ece0", color:"#5a4820" };
+            const topicLabel = LIBRARY_TOPICS.find(t => t.key === book.topic)?.label || book.topic;
+            return (
+              <div key={book.id} className="srch-result" onClick={onNavigateLibrary}>
+                <span className="srch-badge" style={{ background: eraStyle.bg, color: eraStyle.color }}>
+                  {book.era}
+                </span>
+                <div>
+                  <div style={{ fontSize: 11, color: "#9a9082", marginBottom: 1 }}>{book.author} · {topicLabel}</div>
+                  <div className="srch-text" style={{ fontFamily:"'Cormorant Garamond',Georgia,serif", fontStyle:"italic" }}>{book.title}</div>
+                  <div className="srch-note">{book.note.slice(0, 160)}{book.note.length > 160 ? "…" : ""}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {total === 0 && (
+        <div className="srch-empty">No results found. Try a different spelling — diacritics are ignored automatically.</div>
+      )}
     </div>
   );
 }

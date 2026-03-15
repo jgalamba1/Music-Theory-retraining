@@ -19,10 +19,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          # No cache: key - we don't commit a lock file
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build web assets
         run: npm run build
@@ -33,39 +33,97 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
-      - name: Install Capacitor CLI and add Android platform
-        run: |
-          npx cap add android
-          npx cap sync android
+      - name: Add Android platform
+        run: npx cap add android
 
-      - name: Copy icon to Android resources
+      - name: Sync web assets to Android
+        run: npx cap sync android
+
+      - name: Copy adaptive icon layers
         run: |
-          mkdir -p android/app/src/main/res/mipmap-xxxhdpi
-          cp icon.svg android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.xml || true
+          MIPMAP_DIRS="android/app/src/main/res/mipmap-anydpi-v26"
+          mkdir -p "$MIPMAP_DIRS"
+
+          # Write adaptive icon XML referencing foreground + background drawables
+          cat > "$MIPMAP_DIRS/ic_launcher.xml" << 'XMLEOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+            <background android:drawable="@drawable/ic_launcher_background"/>
+            <foreground android:drawable="@drawable/ic_launcher_foreground"/>
+          </adaptive-icon>
+          XMLEOF
+
+          cat > "$MIPMAP_DIRS/ic_launcher_round.xml" << 'XMLEOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+            <background android:drawable="@drawable/ic_launcher_background"/>
+            <foreground android:drawable="@drawable/ic_launcher_foreground"/>
+          </adaptive-icon>
+          XMLEOF
+
+          # Copy SVG layers into drawable
+          mkdir -p android/app/src/main/res/drawable
+          cp resources/android/ic_launcher/foreground.svg \
+             android/app/src/main/res/drawable/ic_launcher_foreground.xml 2>/dev/null || \
+          cp resources/android/ic_launcher/foreground.svg \
+             android/app/src/main/res/drawable/ic_launcher_foreground.svg
+
+          cp resources/android/ic_launcher/background.svg \
+             android/app/src/main/res/drawable/ic_launcher_background.xml 2>/dev/null || \
+          cp resources/android/ic_launcher/background.svg \
+             android/app/src/main/res/drawable/ic_launcher_background.svg
+
+      - name: Decode keystore from secret
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/music-theory-release.jks
+
+      - name: Configure signing in build.gradle
+        run: |
+          cat >> android/app/build.gradle << 'GRADLEOF'
+
+          android {
+            signingConfigs {
+              release {
+                storeFile file("../music-theory-release.jks")
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEYSTORE_PASSWORD")
+              }
+            }
+            buildTypes {
+              release {
+                signingConfig signingConfigs.release
+              }
+            }
+          }
+          GRADLEOF
 
       - name: Make Gradle wrapper executable
         run: chmod +x android/gradlew
+
+      - name: Build signed release APK
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          cd android
+          ./gradlew assembleRelease --no-daemon
 
       - name: Build debug APK
         run: |
           cd android
           ./gradlew assembleDebug --no-daemon
 
-      - name: Build release APK (unsigned)
-        run: |
-          cd android
-          ./gradlew assembleRelease --no-daemon
+      - name: Upload signed release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: music-theory-release-signed
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 90
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: music-theory-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 30
-
-      - name: Upload release APK (unsigned)
-        uses: actions/upload-artifact@v4
-        with:
-          name: music-theory-release-unsigned
-          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
           retention-days: 30
