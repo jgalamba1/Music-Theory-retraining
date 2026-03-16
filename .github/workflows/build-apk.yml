@@ -38,86 +38,44 @@ jobs:
       - name: Sync web assets to Android
         run: npx cap sync android
 
-      - name: Install ImageMagick
-        run: sudo apt-get install -y imagemagick librsvg2-bin
+      - name: Install rsvg-convert
+        run: sudo apt-get install -y librsvg2-bin
 
-      - name: Generate launcher icons from SVG
+      - name: Generate launcher PNG icons from SVG
         run: |
-          # Standard mipmap PNG icons
           mkdir -p android/app/src/main/res/mipmap-mdpi
           mkdir -p android/app/src/main/res/mipmap-hdpi
           mkdir -p android/app/src/main/res/mipmap-xhdpi
           mkdir -p android/app/src/main/res/mipmap-xxhdpi
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi
+          mkdir -p android/app/src/main/res/mipmap-anydpi-v26
+          mkdir -p android/app/src/main/res/values
 
           rsvg-convert -w 48  -h 48  icon.svg > android/app/src/main/res/mipmap-mdpi/ic_launcher.png
           rsvg-convert -w 72  -h 72  icon.svg > android/app/src/main/res/mipmap-hdpi/ic_launcher.png
           rsvg-convert -w 96  -h 96  icon.svg > android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
           rsvg-convert -w 144 -h 144 icon.svg > android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
           rsvg-convert -w 192 -h 192 icon.svg > android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+          rsvg-convert -w 108 -h 108 icon.svg > android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
 
-          # Round variants (same image)
           cp android/app/src/main/res/mipmap-mdpi/ic_launcher.png    android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
           cp android/app/src/main/res/mipmap-hdpi/ic_launcher.png    android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png
           cp android/app/src/main/res/mipmap-xhdpi/ic_launcher.png   android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png
           cp android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png  android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png
           cp android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
 
-          # Adaptive icon foreground (108x108 — artwork in central 72x72 safe zone)
-          mkdir -p android/app/src/main/res/mipmap-anydpi-v26
-          rsvg-convert -w 108 -h 108 icon.svg > android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
-
-          # Adaptive icon XML
-          cat > android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml << 'XMLEOF'
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@color/ic_launcher_background"/>
-    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
-</adaptive-icon>
-XMLEOF
-
-          cat > android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml << 'XMLEOF'
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@color/ic_launcher_background"/>
-    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
-</adaptive-icon>
-XMLEOF
-
-          # Background color
-          mkdir -p android/app/src/main/res/values
-          cat > android/app/src/main/res/values/ic_launcher_background.xml << 'XMLEOF'
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="ic_launcher_background">#18253d</color>
-</resources>
-XMLEOF
-
-          echo "Icons generated:"
-          find android/app/src/main/res -name "ic_launcher*" | sort
+      - name: Write adaptive icon XML and color resource
+        run: |
+          printf '%s\n' '<?xml version="1.0" encoding="utf-8"?>' '<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">' '    <background android:drawable="@color/ic_launcher_background"/>' '    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>' '</adaptive-icon>' > android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+          cp android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          printf '%s\n' '<?xml version="1.0" encoding="utf-8"?>' '<resources>' '    <color name="ic_launcher_background">#18253d</color>' '</resources>' > android/app/src/main/res/values/ic_launcher_background.xml
 
       - name: Decode keystore from secret
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/music-theory-release.jks
 
       - name: Configure signing in build.gradle
         run: |
-          cat >> android/app/build.gradle << 'GRADLEOF'
-          android {
-            signingConfigs {
-              release {
-                storeFile file("../music-theory-release.jks")
-                storePassword System.getenv("KEYSTORE_PASSWORD")
-                keyAlias System.getenv("KEY_ALIAS")
-                keyPassword System.getenv("KEYSTORE_PASSWORD")
-              }
-            }
-            buildTypes {
-              release {
-                signingConfig signingConfigs.release
-              }
-            }
-          }
-GRADLEOF
+          printf '%s\n' 'android {' '  signingConfigs {' '    release {' '      storeFile file("../music-theory-release.jks")' '      storePassword System.getenv("KEYSTORE_PASSWORD")' '      keyAlias System.getenv("KEY_ALIAS")' '      keyPassword System.getenv("KEYSTORE_PASSWORD")' '    }' '  }' '  buildTypes {' '    release {' '      signingConfig signingConfigs.release' '    }' '  }' '}' >> android/app/build.gradle
 
       - name: Make Gradle wrapper executable
         run: chmod +x android/gradlew
