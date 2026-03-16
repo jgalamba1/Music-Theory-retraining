@@ -38,15 +38,6 @@ jobs:
       - name: Sync web assets to Android
         run: npx cap sync android
 
-      - name: Install rsvg-convert
-        run: sudo apt-get install -y librsvg2-bin
-
-      - name: Generate icon PNG for @capacitor/assets
-        run: |
-          mkdir -p assets
-          rsvg-convert -w 1024 -h 1024 icon.svg > assets/icon.png
-          echo "Icon PNG generated: $(ls -lh assets/icon.png)"
-
       - name: Generate all Android icon sizes
         run: npx @capacitor/assets generate --android
 
