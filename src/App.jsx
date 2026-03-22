@@ -190,6 +190,8 @@ const STAGES = [
         { id: "s3_sc_7", text: "Bruckner, Symphony No.7 — Adagio", note: "Extreme harmonic expansion through Wagner-tubas and enormous phrase lengths.", link: "https://imslp.org/wiki/Symphony_No.7_in_E_major_(Bruckner,_Anton)" },
         { id: "s3_sc_8", text: "Wolf, Mörike Lieder: Auf ein altes Bild; Schlafendes Jesuskind; Gesang Weylas", note: "Compare directly with Schubert songs on related subjects — the historical distance in harmonic language becomes audible.", link: "https://imslp.org/wiki/M%C3%B6rikelieder_(Wolf,_Hugo)" },
         { id: "s3_sc_9", text: "Mahler, Kindertotenlieder: modal harmony, tonal ambiguity, formal fragmentation", link: "https://imslp.org/wiki/Kindertotenlieder_(Mahler,_Gustav)" },
+        { id: "s3_sc_9b", text: "Richard Strauss, Salome — final scene (Salome's monologue): the harmonic language at its most extreme", note: "The Salome chord and the language surrounding it push further than Wagner in some respects while remaining functional — dominant seventh chords a tritone apart, chromatic voice-leading of extraordinary density. This is the precipice before atonality. Compare directly with the Tristan Prelude: both postpone tonal resolution, but Strauss's dissonances are more overtly violent. Then study the opening of Der Rosenkavalier (1911) for the deliberate retreat — understanding why Strauss pulled back clarifies what Schoenberg chose to do instead.", link: "https://imslp.org/wiki/Salome,_Op.54_(Strauss,_Richard)" },
+        { id: "s3_sc_9c", text: "Richard Strauss, Don Juan Op.20 and Tod und Verklärung Op.24: the tone poem as harmonic narrative", note: "Before the extreme chromaticism of Salome, study Strauss's earlier harmonic language: still within expanded tonality but with enormous expressive range. Don Juan's opening is one of the most effective harmonic gestures in the orchestral literature — analyze how the E major arrival is prepared and how it is subsequently destabilized.", link: "https://imslp.org/wiki/Don_Juan,_Op.20_(Strauss,_Richard)" },
         { id: "s3_sc_10", text: "Fauré, Piano Quartet No.1 Op.15: non-functional chord successions that feel inevitable", note: "One of the most underrated harmonic languages in the literature.", link: "https://imslp.org/wiki/Piano_Quartet_No.1_in_C_minor,_Op.15_(Faur%C3%A9,_Gabriel)" },
         { id: "s3_sc_11", text: "Fauré, Requiem: modal harmony in sacred context — compare with Brahms and Verdi", link: "https://imslp.org/wiki/Requiem,_Op.48_(Faur%C3%A9,_Gabriel)" },
         { id: "s3_sc_12", text: "Ravel, String Quartet in F major: compare with Debussy SQ (more tonally anchored)", link: "https://imslp.org/wiki/String_Quartet_in_F_major_(Ravel,_Maurice)" },
@@ -225,19 +227,39 @@ const STAGES = [
         { id: "s4_th_2", text: "Taruskin, Music in the Early 20th Century (Oxford History Vol.4)", note: "The best narrative of how the common practice dissolved. Strong on Stravinsky, Schoenberg, the neoclassicists." },
         { id: "s4_th_3", text: "Schoenberg, Style and Idea: 'Brahms the Progressive' and 'My Evolution'" },
         { id: "s4_th_4", text: "Bartók, Harvard Lectures (study alongside String Quartet No.4 score)" },
+        { id: "s4_th_5", text: "Impressionist harmonic language — analytic framework: read Parks, The Music of Claude Debussy (Chs. 1–4) and Howat, Debussy in Proportion (Part I) before the Préludes score study", note: "The core techniques to identify and name: whole-tone and octatonic collections as pitch fields replacing key, parallel planing as texture rather than voice-leading error, non-functional chord successions using chords for color, suppression of leading-tone drive, pentatonic melody over static harmony, and formal articulation through timbre and register rather than cadence. Parks provides the pitch-class vocabulary; Howat explains what replaces sonata-form proportions. Messiaen's Technique (already in library) should be read alongside for modes of limited transposition as a systematic extension of Debussy's scalar practice." },
+        { id: "s4_th_6", text: "Soviet harmonic practice — analytic framework: read Fanning, Shostakovich: String Quartet No.8 and Meyer, Shostakovich: His Life, Times and Music (analytic chapters)", note: "The vocabulary to internalize: modal diatonicism as harmonic language rather than modal color (the Dorian and Phrygian inflections are structural, not decorative), the flattened supertonic as a characteristic harmonic fingerprint, tonality established by obsessive repetition rather than functional progression, ironic tonal juxtaposition (the sudden intrusion of a banal march or waltz into tragic context), and the use of quotation as structural device. Shostakovich's harmonic language is not post-tonal — it is deliberately, aggressively tonal in a way that makes tonality feel unstable through context and repetition." },
+        { id: "s4_th_7", text: "Prokofiev harmonic language — analytic framework: read Minturn, The Music of Sergei Prokofiev (Chs. 2–4) and the harmonic language chapter in the Cambridge Companion to Prokofiev", note: "The 'wrong note' technique is Prokofiev's signature: diatonic or modal melody harmonized with chromatically displaced chords that are a semitone or tritone away from where functional logic would place them. The effect is sardonic, brittle, or grotesque depending on context. Minturn's pitch-class analysis shows this is systematic rather than arbitrary. Also study: sudden tonal sidestepping by semitone (a chord simply moves up or down a half-step rather than resolving), unresolved dissonance used as wit rather than tension, and the relationship between his aggressive diatonicism and his ironic engagement with Classical formal gestures." },
+        { id: "s4_th_8", text: "Stravinsky harmonic language — analytic framework: read van den Toorn, Stravinsky and The Rite of Spring and Berger's essay 'Problems of Pitch Organization in Stravinsky' (1963); consult Straus, Remaking the Past for the neoclassical period", note: "The octatonic collection is Stravinsky's primary pitch resource in the Russian period — van den Toorn's analysis shows it operating systematically across the Rite, Petrushka, and Les Noces. Berger's essay is the founding document of this analytical tradition. Key concepts: octatonic/diatonic interaction (most Stravinsky passages mix both rather than using one exclusively), polytonality as polytonal superimposition of two clear tonal streams, stratification as formal principle (juxtaposing blocks of material rather than developing them), and metric displacement between notated and perceptible meter. Taruskin's counterargument — that the pitch collections derive from Russian folk modes rather than abstract octatonic logic — is worth reading as a corrective; the truth is probably both." },
+        { id: "s4_th_9", text: "Takemitsu — analytic framework: read Burt, The Music of Tōru Takemitsu (Chs. 1–3 and 6)", note: "Takemitsu's synthesis is unique: Debussy's non-functional harmony and timbre-as-structure, Messiaen's modes of limited transposition, and Japanese aesthetic principles that have no equivalent in Western theory. The most important concept to internalize is ma (間) — negative space, the meaningful pause, silence as presence rather than absence. In Japanese musical aesthetics broadly, and in the court and ritual traditions specifically, sustained tone and silence are co-equal events; Takemitsu applies the same principle to Western orchestral texture. His pitch language is largely derived from Messiaen and Debussy (already well-covered in this program), but the formal logic is governed by Japanese aesthetic rather than Western developmental processes. Study his scores alongside the Messiaen modes work and the Debussy texture analysis — the Western analytic tools apply to the pitch content; the formal framework requires a different orientation entirely." },
+        { id: "s4_th_10", text: "Pärt — tintinnabuli technique: read Hillier, Arvo Pärt (Chs. 2–4)", note: "Pärt's tintinnabuli technique is among the simplest compositional systems in the twentieth-century literature and among the most concentrated in effect. The tintinnabuli voice is restricted to the notes of the tonic triad; the melodic voice moves stepwise. The harmonic result is radical stasis — there is no harmonic progression in the functional sense, only the registral and rhythmic unfolding of a single sonority. The connection to Gregorian chant and Orthodox liturgical practice is direct and acknowledged by Pärt himself: the stepwise melodic line, the modal pitch field, the use of silence as structural presence rather than empty duration, and the subordination of harmonic development to contemplative stillness all have clear precedents in plainchant. Hillier traces this lineage carefully. Read alongside the score of Passio — compare the vocal writing with Gregorian passion tones directly." },
       ],
       score: [
-        { id: "s4_sc_0", text: "Debussy, Préludes Book I: La cathédrale engloutie, La fille aux cheveux de lin, Des pas sur la neige", note: "In each: ask what has replaced the function of the dominant.", link: "https://imslp.org/wiki/Pr%C3%A9ludes,_Book_1_(Debussy,_Claude)" },
-        { id: "s4_sc_1", text: "Debussy, String Quartet in G minor Op.10", note: "Debussy's harmonic language pressed into a Classical form. The tension between world and expectation is itself the subject.", link: "https://imslp.org/wiki/String_Quartet_in_G_minor,_Op.10_(Debussy,_Claude)" },
-        { id: "s4_sc_2", text: "Debussy, Pelléas et Mélisande — selected scenes: modal vocal writing and static harmonics", link: "https://imslp.org/wiki/Pell%C3%A9as_et_M%C3%A9lisande,_L.88_(Debussy,_Claude)" },
+        { id: "s4_sc_0", text: "Debussy, Préludes Book I: La cathédrale engloutie, Voiles, Des pas sur la neige, La fille aux cheveux de lin", note: "In each: identify the pitch collection in use (whole-tone in Voiles, pentatonic in La fille, modal in Des pas). Ask what has replaced the function of the dominant. Note formal articulation by timbre and register rather than cadence.", link: "https://imslp.org/wiki/Pr%C3%A9ludes,_Book_1_(Debussy,_Claude)" },
+        { id: "s4_sc_0b", text: "Debussy, Préludes Book II: Brouillards, Feuilles mortes, La Puerta del Vino", note: "The harmonic language is more extreme here. Brouillards superimposes C major and B-flat major simultaneously. Analyze chord-by-chord: what is the logic of succession if not functional?", link: "https://imslp.org/wiki/Pr%C3%A9ludes,_Book_2_(Debussy,_Claude)" },
+        { id: "s4_sc_1", text: "Debussy, String Quartet in G minor Op.10", note: "Debussy's harmonic language pressed into a Classical form. The tension between idiom and expectation is itself the subject.", link: "https://imslp.org/wiki/String_Quartet_in_G_minor,_Op.10_(Debussy,_Claude)" },
+        { id: "s4_sc_2", text: "Debussy, Pelléas et Mélisande — selected scenes (Acts II, III, IV): modal vocal writing, static harmonics, orchestral texture as harmonic event", note: "This is Debussy's most concentrated laboratory of non-functional harmony. The orchestra never doubles the voice; the harmonies float beneath speech rhythm. Identify the modal center of each scene — it shifts, but there is always one.", link: "https://imslp.org/wiki/Pell%C3%A9as_et_M%C3%A9lisande,_L.88_(Debussy,_Claude)" },
+        { id: "s4_sc_2b", text: "Ravel, Gaspard de la nuit: Ondine, Le Gibet, Scarbo", note: "Ravel's harmonic language is more anchored than Debussy's — Le Gibet sustains B-flat as a pedal for the entire movement while the harmonies above it are chromatic and non-functional. Scarbo uses added-note chords (major 7th, minor 9th) as stable sonorities. Compare each movement's relationship to functional harmony with the equivalent Debussy work.", link: "https://imslp.org/wiki/Gaspard_de_la_nuit_(Ravel,_Maurice)" },
         { id: "s4_sc_3", text: "Ravel, Pavane pour une infante défunte; Piano Sonatine (Sonatine first movement as compressed sonata form)", link: "https://imslp.org/wiki/Pavane_pour_une_infante_d%C3%A9funte_(Ravel,_Maurice)" },
         { id: "s4_sc_4", text: "Fauré, Piano Quartet No.2 Op.45: late Fauré, tonal centers without dominant confirmation", link: "https://imslp.org/wiki/Piano_Quartet_No.2_in_G_minor,_Op.45_(Faur%C3%A9,_Gabriel)" },
         { id: "s4_sc_5", text: "Prokofiev, Classical Symphony Op.25: identify every Classical formal feature; note departures", link: "https://imslp.org/wiki/Symphony_No.1,_Op.25_(Prokofiev,_Sergei)" },
+        { id: "s4_sc_5b", text: "Prokofiev, Symphony No.5 Op.100: the most accessible entry into his large-scale symphonic language", note: "Study the first movement: identify the 'wrong-note' technique in action — where does the harmony sidestep by semitone or tritone instead of resolving? Track the modal inflections in the slow movement. The finale uses aggressive diatonicism as irony — the apparent simplicity is deliberate.", link: "https://imslp.org/wiki/Symphony_No.5,_Op.100_(Prokofiev,_Sergei)" },
+        { id: "s4_sc_5c", text: "Prokofiev, Romeo and Juliet excerpts (Suites 1 and 2): modal-diatonic harmonic language in orchestral context", note: "The Dance of the Knights and Balcony Scene are the essential contrasts: one uses aggressive diatonic ostinato with harmonic displacement, the other uses modal lyricism. Both demonstrate how Prokofiev generates harmonic color through tonal means rather than abandoning tonality.", link: "https://imslp.org/wiki/Romeo_and_Juliet,_Op.64_(Prokofiev,_Sergei)" },
         { id: "s4_sc_6", text: "Prokofiev, Violin Sonata No.1 Op.80: motivic obsession; modal slow movement", note: "A natural work to study in depth as a violinist.", link: "https://imslp.org/wiki/Violin_Sonata_No.1,_Op.80_(Prokofiev,_Sergei)" },
         { id: "s4_sc_7", text: "Shostakovich, String Quartet No.8 Op.110: DSCH monogram; tonality established by repetition, not function", link: "https://imslp.org/wiki/String_Quartet_No.8,_Op.110_(Shostakovich,_Dmitri)" },
+        { id: "s4_sc_7b", text: "Shostakovich, Symphony No.5 Op.47: the most analytically legible entry into his symphonic language", note: "First movement: trace how the home key is established through obsessive return rather than cadential confirmation. Development section: the harmonic language under duress. Third movement: modal lyricism and the flattened supertonic. Fourth movement: the forced march finale — is the apparent triumph genuine or ironic? Fanning's and Meyer's analytic readings are essential companions here.", link: "https://imslp.org/wiki/Symphony_No.5,_Op.47_(Shostakovich,_Dmitri)" },
+        { id: "s4_sc_7c", text: "Shostakovich, Symphony No.10 Op.93: the most harmonically sophisticated", note: "The second movement (Scherzo) is universally identified as a portrait of Stalin — study how rhythmic and harmonic aggression work together. The third movement introduces the DSCH monogram. The fourth movement's ambiguous ending is one of the great unresolved questions in the symphonic literature: tragic or triumphant?", link: "https://imslp.org/wiki/Symphony_No.10,_Op.93_(Shostakovich,_Dmitri)" },
+        { id: "s4_sc_7d", text: "Schnittke, String Quartet No.3: polystylism in concentrated form", note: "Schnittke quotes Beethoven's Grosse Fuge, a Renaissance chanson, and his own DSCH-derived monogram simultaneously and in layered succession. Study how the juxtaposition of styles creates meaning beyond any single style. This is the logical extension of Shostakovich's ironic quotation practice.", link: "https://imslp.org/wiki/String_Quartet_No.3_(Schnittke,_Alfred)" },
+        { id: "s4_sc_11b", text: "Stravinsky, Petrushka (1911 version): polytonality (C major/F-sharp major superimposition in the Petrushka chord), octatonic passagework in the crowd scenes", note: "The 'Petrushka chord' — simultaneous C major and F-sharp major triads — is the most famous polytonal gesture in the literature. Identify all octatonic passages: they are clearly delineated from the diatonic folk-song material by texture and register. Van den Toorn's analysis maps every collection; use it as a guide.", link: "https://imslp.org/wiki/Petrushka_(Stravinsky,_Igor)" },
+        { id: "s4_sc_11c", text: "Stravinsky, The Rite of Spring: complete score study", note: "The foundational post-tonal orchestral work. Work through with van den Toorn's analysis: Part I uses octatonic/diatonic interaction as the primary pitch strategy; Part II pushes toward octatonic saturation. Track the metric displacement throughout — the notated barlines rarely coincide with the perceptible accent pattern. The Sacrificial Dance is the most complex metric structure in the orchestral literature before Ligeti.", link: "https://imslp.org/wiki/The_Rite_of_Spring_(Stravinsky,_Igor)" },
+        { id: "s4_sc_11d", text: "Stravinsky, Symphony of Psalms: neoclassical harmonic language", note: "The E minor of the opening is established not by functional harmony but by registral weight and repetition — exactly the same technique as Shostakovich, but applied to a different aesthetic end. The second movement fugue is the best single example of Stravinsky's neoclassical counterpoint. Compare with Bach directly.", link: "https://imslp.org/wiki/Symphony_of_Psalms_(Stravinsky,_Igor)" },
         { id: "s4_sc_8", text: "Bartók, Music for Strings, Percussion and Celesta: fugue tonal plan (chromatic expansion from A); axis tonality", link: "https://imslp.org/wiki/Music_for_Strings,_Percussion_and_Celesta_(Bart%C3%B3k,_B%C3%A9la)" },
         { id: "s4_sc_9", text: "Bartók, String Quartet No.4: arch form (ABCBA); chromatic voice leading", note: "Study alongside the Harvard Lectures for theoretical framing in Bartók's own words.", link: "https://imslp.org/wiki/String_Quartet_No.4_(Bart%C3%B3k,_B%C3%A9la)" },
         { id: "s4_sc_10", text: "Hindemith, Mathis der Maler Symphony: study alongside The Craft of Musical Composition", link: "https://imslp.org/wiki/Mathis_der_Maler_(symphony)_(Hindemith,_Paul)" },
+        { id: "s4_sc_12", text: "Takemitsu, November Steps (1967): for biwa, shakuhachi, and orchestra", note: "The essential Takemitsu score for this program. The biwa and shakuhachi are not integrated into the orchestra in the Western concerto sense — they occupy separate sonic and temporal spaces, separated by silence. Ma operates structurally: the rests are not preparation for the next event but events themselves. Identify where the Western orchestral material uses Debussy-derived non-functional harmony and where the Japanese instruments follow a completely different temporal logic. The two worlds do not resolve into synthesis — their separateness is the point.", link: "https://imslp.org/wiki/November_Steps_(Takemitsu,_T%C5%8Dru)" },
+        { id: "s4_sc_12b", text: "Takemitsu, A Flock Descends into the Pentagonal Garden (1977): orchestral texture as harmonic field", note: "Takemitsu's mature orchestral language. The pentatonic collection here is not a scale but a field — pitches that exist in a space rather than moving through it. Compare with Debussy's La cathédrale engloutie: the structural logic is similar but Takemitsu's relationship to silence is more extreme.", link: "https://imslp.org/wiki/A_Flock_Descends_into_the_Pentagonal_Garden_(Takemitsu,_T%C5%8Dru)" },
+        { id: "s4_sc_13", text: "Pärt, Spiegel im Spiegel (1978) and Fratres (1977/1980): tintinnabuli technique in concentrated form", note: "Spiegel im Spiegel is the clearest laboratory of tintinnabuli writing: one voice restricted to the F major triad, one voice moving stepwise in long values. The harmonic stasis is absolute — there is no progression. Study how Pärt creates formal shape and emotional arc without harmonic movement: the tools are register, dynamics, and the relationship between the two voices. Fratres applies the technique to more complex rhythmic and registral patterns. The debt to plainchant is audible throughout — the melodic voice behaves like a chant melody: stepwise, modal, unhurried, oriented toward contemplation rather than drama.", link: "https://imslp.org/wiki/Spiegel_im_Spiegel_(P%C3%A4rt,_Arvo)" },
+        { id: "s4_sc_13b", text: "Pärt, Passio (1982): tintinnabuli applied to large-scale sacred form", note: "Pärt's setting of the St. John Passion. Hear alongside the Gregorian passion tone tradition it consciously evokes — the parallel is not metaphorical but structural. The reciting tone, the cadential formulas, the subordination of melodic interest to textual clarity: all of these are plainchant principles applied within a twentieth-century harmonic framework. Hillier's analysis maps the plainchant models directly.", link: "https://imslp.org/wiki/Passio_(P%C3%A4rt,_Arvo)" },
       ],
       keyboard: [
         { id: "s4_kb_0", text: "For each Debussy prelude studied: identify at keyboard what replaces dominant function" },
@@ -245,15 +267,21 @@ const STAGES = [
         { id: "s4_kb_2", text: "Experiment with whole-tone, octatonic, and pentatonic scale harmonizations at keyboard" },
       ],
       ear: [
-        { id: "s4_er_0", text: "Identify whole-tone, pentatonic, and octatonic scales by ear in musical context" },
+        { id: "s4_er_0", text: "Identify whole-tone, pentatonic, and octatonic scales by ear in musical context (Debussy, Stravinsky)" },
         { id: "s4_er_1", text: "Identify modal centers without dominant confirmation in Debussy and Fauré passages" },
         { id: "s4_er_2", text: "Follow Bartók String Quartet No.4 with score: map the arch form structure in real time" },
         { id: "s4_er_3", text: "Compare Prokofiev Classical Symphony with a Haydn symphony by ear: identify the 'wrong-note' departures" },
+        { id: "s4_er_4", text: "Identify parallel planing by ear in Debussy: distinguish from conventional voice leading by the absence of contrary motion and resolution" },
+        { id: "s4_er_5", text: "Shostakovich modal-mixture ear training: in Symphony No.5 and Quartet No.8, identify the flattened supertonic and Dorian/Phrygian inflections by ear as they occur", note: "The goal is to hear these as characteristic rather than anomalous — they are the tonal fingerprint of the Soviet school." },
+        { id: "s4_er_6", text: "Stravinsky metric displacement: follow The Rite of Spring with score; mark where the perceptible accent falls vs. the notated barline. Listen without score first, then verify." },
+        { id: "s4_er_7", text: "Pitch collection identification test: identify whole-tone, octatonic, pentatonic, or modal collection in 10 consecutive Debussy or Shostakovich excerpts by ear without score", note: "Target: consistent accuracy. This is the Stage 5 ear training milestone." },
       ],
       composition: [
-        { id: "s4_co_0", text: "Write a complete harmonic analysis of Debussy String Quartet, first movement", note: "Identify specific techniques by name: whole-tone passages, modal areas, non-functional successions." },
+        { id: "s4_co_0", text: "Write a complete harmonic analysis of Debussy String Quartet, first movement", note: "Identify specific techniques by name: whole-tone passages, modal areas, non-functional successions, parallel planing. The analysis should account for every chord — if it isn't functional, what is its logic?" },
         { id: "s4_co_1", text: "Compose a short piece (20–30 measures) using at least two Stage Five techniques within a recognizable formal plan" },
         { id: "s4_co_2", text: "Sketch a formal plan for a movement using Bartók's arch-form (ABCBA) symmetrical logic" },
+        { id: "s4_co_3", text: "Compose a short piece (16–24 measures) using non-functional parallel motion over a single pitch collection (whole-tone or octatonic)", note: "The challenge is to create a sense of direction and arrival without functional harmony. Use register, dynamics, and texture as the formal agents." },
+        { id: "s4_co_4", text: "Compose a short movement using Soviet modal-diatonic technique: establish tonal center by repetition rather than cadence; include at least one flattened-supertonic gesture and one ironic stylistic juxtaposition", note: "Listen to the slow movement of Shostakovich's Fifth Symphony and the third movement of the Eighth Quartet as models before composing." },
       ],
     },
   },
@@ -278,6 +306,7 @@ const MILESTONES = [
   { month: 12, name: "Partitura realization",            test: "Realize a Baroque trio sonata continuo part from bass line and figures at keyboard, with appropriate inner voices." },
   { month: 15, name: "Extended harmony: analytic",       test: "Write a harmonic analysis of the Debussy String Quartet, first movement, identifying specific techniques by name." },
   { month: 18, name: "Extended harmony: compositional",  test: "Compose a short piece (20–30 measures) employing at least two Stage Five techniques within a recognizable formal plan." },
+  { month: 15, name: "Pitch collection identification",   test: "Identify whole-tone, octatonic, pentatonic, or modal collection in 10 consecutive Debussy or Shostakovich excerpts by ear without score. Consistent accuracy required." },
 ];
 
 // ── CONCURRENT GROUPS ─────────────────────────────────────────────────────────
@@ -368,6 +397,8 @@ const CONCURRENT_GROUPS = [
   ["s3_sc_1", "s3_sc_2", "s3_sc_3", "s3_kb_2", "s3_er_1"],
   // Stage 4 ─ Mahler/Wolf: dissolution of tonality, compare with Tristan
   ["s3_sc_8", "s3_sc_9", "s3_sc_6"],
+  // Stage 4 ─ R. Strauss: Salome + Don Juan as harmonic bridge to Stage 5
+  ["s3_sc_9b", "s3_sc_9c", "s3_sc_6"],
 
   // Stage 5 ─ Antokoletz + Bartók scores + ear + keyboard
   ["s4_th_1", "s4_sc_8", "s4_sc_9", "s4_er_2", "s4_kb_1"],
@@ -375,16 +406,36 @@ const CONCURRENT_GROUPS = [
   ["s4_th_4", "s4_sc_9"],
   // Stage 5 ─ Hindemith Craft + Mathis der Maler
   ["s4_th_0", "s4_sc_10"],
-  // Stage 5 ─ Debussy cluster: scores + keyboard + ear + analysis composition
-  ["s4_sc_0", "s4_sc_1", "s4_sc_2", "s4_kb_0", "s4_er_0", "s4_er_1", "s4_co_0"],
+  // Stage 5 ─ Debussy cluster: theory framework + scores + keyboard + ear + analysis
+  ["s4_th_5", "s4_sc_0", "s4_sc_0b", "s4_sc_1", "s4_sc_2", "s4_kb_0", "s4_er_0", "s4_er_1", "s4_er_4", "s4_co_0"],
+  // Stage 5 ─ Ravel cluster: scores alongside Debussy
+  ["s4_sc_2b", "s4_sc_3", "s4_sc_0"],
+  // Stage 5 ─ Impressionist composition: Debussy scores as model
+  ["s4_co_3", "s4_sc_0", "s4_sc_0b"],
+  // Stage 5 ─ Ear collection ID test: capstone of Impressionist + Soviet ear work
+  ["s4_er_7", "s4_er_0", "s4_er_5"],
+  // Stage 5 ─ Soviet cluster: theory framework + Shostakovich scores + ear
+  ["s4_th_6", "s4_sc_7", "s4_sc_7b", "s4_sc_7c", "s4_er_5"],
+  // Stage 5 ─ Schnittke: polystylism in context of Soviet tradition
+  ["s4_sc_7d", "s4_sc_7", "s4_sc_7b"],
+  // Stage 5 ─ Soviet composition: Shostakovich scores as model
+  ["s4_co_4", "s4_sc_7b", "s4_sc_7"],
+  // Stage 5 ─ Prokofiev cluster: theory framework + symphonies + Violin Sonata + ear
+  ["s4_th_7", "s4_sc_5", "s4_sc_5b", "s4_sc_5c", "s4_sc_6", "s4_er_3"],
+  // Stage 5 ─ Stravinsky cluster: theory framework + Rite + Petrushka + Psalms + ear
+  ["s4_th_8", "s4_sc_11b", "s4_sc_11c", "s4_sc_11d", "s4_er_6"],
   // Stage 5 ─ Extended harmony composition uses Debussy and Bartók as models
   ["s4_co_1", "s4_sc_0", "s4_sc_1", "s4_sc_8"],
   // Stage 5 ─ Prokofiev Classical Symphony + comparison ear training
   ["s4_sc_5", "s4_er_3"],
   // Stage 5 ─ Taruskin: broad narrative alongside Stage 5 scores
-  ["s4_th_2", "s4_sc_5", "s4_sc_7", "s4_sc_8"],
+  ["s4_th_2", "s4_sc_5", "s4_sc_7", "s4_sc_8", "s4_sc_11c"],
   // Stage 5 ─ Arch form composition: Bartók scores as models
   ["s4_co_2", "s4_sc_8", "s4_sc_9"],
+  // Stage 5 ─ Takemitsu cluster: theory (ma + Debussy connection) + scores
+  ["s4_th_9", "s4_sc_12", "s4_sc_12b", "s4_th_5"],
+  // Stage 5 ─ Pärt cluster: tintinnabuli theory + scores; connects to shōmyō background
+  ["s4_th_10", "s4_sc_13", "s4_sc_13b"],
 ];
 
 // Build flat task lookup: id → {track, text}
@@ -631,6 +682,39 @@ const LIBRARY = [
   { id:"lb_pt_10", topic:"posttonal", era:"Contemporary",
     author:"Milton Babbitt", title:"Words About Music", year:"1987",
     note:"Collected lectures by the most rigorous American serialist. Babbitt's arguments for musical complexity, his account of twelve-tone combinatoriality, and his concept of the 'time-point system' represent one pole of post-war compositional thinking. Required as intellectual counterweight to Hindemith and the neoclassicists." },
+  { id:"lb_pt_11", topic:"posttonal", era:"Contemporary",
+    author:"Richard Parks", title:"The Music of Claude Debussy", year:"1989",
+    note:"The most rigorous pitch-class analytic study of Debussy's corpus. Parks applies interval-class and set-class analysis to the Préludes, Études, and orchestral works, showing that Debussy's apparently intuitive harmonic language is systematically governed by whole-tone, octatonic, and pentatonic collections. The essential analytic companion to the Impressionist score study track." },
+  { id:"lb_pt_12", topic:"posttonal", era:"Contemporary",
+    author:"Roy Howat", title:"Debussy in Proportion", year:"1983",
+    note:"A study of formal proportions in Debussy — Golden Section, Fibonacci series, and arch structures — revealing the architectural logic underneath music that appears to dissolve Classical form. Howat demonstrates that Debussy replaces cadential articulation with proportional articulation: the formal landmarks are registral and dynamic peaks rather than harmonic arrivals. Essential for understanding what replaces sonata-form proportions in this idiom." },
+  { id:"lb_pt_13", topic:"posttonal", era:"Contemporary",
+    author:"Mark DeVoto", title:"Debussy and the Veil of Tonality", year:"2004",
+    note:"A comprehensive survey of Debussy's harmonic language organized by technique: modal harmony, whole-tone writing, non-functional chord successions, parallel motion, and the dissolution of voice-leading independence. More accessible than Parks; better as a first reading before the more technical analysis." },
+  { id:"lb_pt_14", topic:"posttonal", era:"Contemporary",
+    author:"David Fanning", title:"Shostakovich: String Quartet No. 8", year:"2004",
+    note:"The most concentrated analytic monograph on a single Shostakovich work. Covers the DSCH monogram, the self-quotation network, the harmonic language of modal diatonicism, and the biographical context. A model of how to approach the Soviet school analytically — the methods generalize to the symphonies." },
+  { id:"lb_pt_15", topic:"posttonal", era:"Contemporary",
+    author:"Krzysztof Meyer", title:"Shostakovich: His Life, Times and Music", year:"1995",
+    note:"Written by a direct pupil and close friend. The analytic chapters — on harmonic language, formal processes, and expressive means — provide an insider's account of how Shostakovich understood his own technique. Particularly valuable on the modal inflections, the role of the flattened supertonic, and the relationship between irony and musical structure." },
+  { id:"lb_pt_16", topic:"posttonal", era:"Contemporary",
+    author:"Neil Minturn", title:"The Music of Sergei Prokofiev", year:"1997",
+    note:"The most analytically rigorous study of Prokofiev's harmonic language. Minturn applies pitch-class set theory to Prokofiev's scalar collections and systematizes the 'wrong-note' technique — showing that the chromatic displacements are governed by specific interval relationships rather than being arbitrary. The essential theoretical companion to the Prokofiev score study track." },
+  { id:"lb_pt_17", topic:"posttonal", era:"Contemporary",
+    author:"Riley, Matthew (ed.)", title:"The Cambridge Companion to Prokofiev", year:"2008",
+    note:"The harmonic language chapter by Dorothea Redepenning is more accessible than Minturn and covers the full stylistic range from the early Sarcasms through the late sonatas. Prokofiev's own chapter on his 'new simplicity' aesthetic and his relationship to Classical models is also in this volume." },
+  { id:"lb_pt_18", topic:"posttonal", era:"Modern",
+    author:"Arthur Berger", title:"'Problems of Pitch Organization in Stravinsky' (Perspectives of New Music)", year:"1963",
+    note:"The founding document of Stravinsky analysis. Berger established the octatonic collection as the primary pitch resource of Stravinsky's Russian period, transforming how the Rite, Petrushka, and Les Noces are understood. Short, rigorous, and historically indispensable — read before van den Toorn." },
+  { id:"lb_pt_19", topic:"posttonal", era:"Contemporary",
+    author:"Pieter van den Toorn", title:"The Music of Igor Stravinsky", year:"1983",
+    note:"The systematic expansion of Berger's octatonic thesis across Stravinsky's entire output. Van den Toorn maps every octatonic and diatonic collection across the Russian, neoclassical, and serial periods, showing the continuity underlying apparent stylistic rupture. The standard analytic reference for Stravinsky." },
+  { id:"lb_pt_20", topic:"posttonal", era:"Contemporary",
+    author:"Pieter van den Toorn", title:"Stravinsky and The Rite of Spring", year:"1987",
+    note:"A more focused and accessible expansion of the Rite analysis from the 1983 volume. The most detailed score-by-score analysis of the Rite available, with every collection identified and every metric displacement mapped. Essential companion to the Rite score study task." },
+  { id:"lb_pt_21", topic:"posttonal", era:"Contemporary",
+    author:"Joseph Straus", title:"Remaking the Past: Musical Modernism and the Influence of the Tonal Tradition", year:"1990",
+    note:"On Stravinsky's neoclassical period and the broader modernist practice of reworking earlier music. Straus analyzes how Stravinsky recomposes Bach, Handel, and Pergolesi — not as pastiche but as a way of working through the anxiety of influence. The theoretical framework applies equally to Prokofiev and Shostakovich's relationships to Classical convention." },
 
   // ── STYLE, HISTORY & AESTHETICS ──────────────────────────────────────────
   { id:"lb_sh_0", topic:"aesthetics", era:"Baroque",
@@ -666,6 +750,12 @@ const LIBRARY = [
   { id:"lb_sh_8", topic:"aesthetics", era:"Contemporary",
     author:"Charles Rosen", title:"The Romantic Generation", year:"1995",
     note:"Rosen's companion to The Classical Style; covers Schubert, Schumann, Chopin, and the Lied with the same rhetorical intelligence. The treatment of Schubert's harmonic language is the best short account available." },
+  { id:"lb_sh_9", topic:"aesthetics", era:"Romantic",
+    author:"Richard Strauss & Romain Rolland", title:"Correspondence, Diary, and Essays", year:"1951",
+    note:"The primary source for understanding Strauss's own aesthetic position — his conscious decision to retreat from the harmonic precipice of Elektra, his relationship to the German symphonic tradition, and his self-understanding as the last heir of Wagner and Liszt. Read alongside the scores of Salome and Der Rosenkavalier for the full picture of what he chose to do and not do." },
+  { id:"lb_sh_10", topic:"aesthetics", era:"Romantic",
+    author:"Bryan Gilliam", title:"The Life of Richard Strauss", year:"1999",
+    note:"The most accessible scholarly account of Strauss's career and aesthetic development. The chapter on the transition from Elektra to Der Rosenkavalier — from the edge of atonality to deliberate neoclassical retreat — is essential for Stage 4. Gilliam also covers Strauss's theoretical views and his relationship to the Schoenberg generation." },
 
   // ── COMPOSITION & CRAFT ──────────────────────────────────────────────────
   { id:"lb_cc_0", topic:"craft", era:"Baroque",
@@ -777,6 +867,30 @@ const LIBRARY = [
   { id:"lb_bx_10", topic:"beyond", era:"Contemporary",
     author:"Grisey, Gérard", title:"'Tempus ex Machina: A Composer's Reflections on Musical Time'", year:"1987",
     note:"Grisey's account of his temporal philosophy — the spectrum of time from 'smooth' to 'striated,' and the relationship between acoustic envelope, spectral structure, and formal duration. One of the most original theoretical texts of the late twentieth century; connects Helmholtz and Parncutt to living compositional practice." },
+
+  // — Takemitsu —
+  { id:"lb_bx_15", topic:"beyond", era:"Contemporary",
+    author:"Peter Burt", title:"The Music of Tōru Takemitsu", year:"2001",
+    note:"The most comprehensive analytic study of Takemitsu's output. Covers his synthesis of Debussy, Messiaen, and Japanese aesthetics across the full range of his work. The chapters on ma (間) as a structural principle are indispensable — Burt explains how negative space functions formally in a way that has no equivalent in Western music theory. Western analytic tools can account for Takemitsu's pitch content; they cannot account for his formal logic, which is governed by Japanese aesthetic principles in which silence is not absence but presence, and in which sustained sonority is an event rather than a passage." },
+  { id:"lb_bx_16", topic:"beyond", era:"Contemporary",
+    author:"Takemitsu, Tōru", title:"Confronting Silence: Selected Writings", year:"1995",
+    note:"Takemitsu's own essays on his aesthetic position — his relationship to Japanese and Western traditions, the concept of sound as nature, and his deliberate refusal to choose between East and West. Short and beautifully written. The essay 'One Sound' is the essential statement of his compositional philosophy." },
+
+  // — Pärt —
+  { id:"lb_bx_17", topic:"beyond", era:"Contemporary",
+    author:"Paul Hillier", title:"Arvo Pärt", year:"1997",
+    note:"The standard scholarly monograph. Hillier — a conductor closely associated with Pärt's music — provides both technical analysis of the tintinnabuli technique and historical context for its development out of Pärt's earlier serialist phase. The chapters on Pärt's relationship to Gregorian chant and Orthodox liturgical chant are essential: Hillier demonstrates that the tintinnabuli voice and melodic voice directly model the structural principles of plainchant — modal pitch field, stepwise motion, reciting tone, cadential formula, and the subordination of harmonic interest to contemplative stasis." },
+  { id:"lb_bx_18", topic:"beyond", era:"Contemporary",
+    author:"Laura Dolp (ed.)", title:"Arvo Pärt's Resonant Texts", year:"2014",
+    note:"A collection of analytic and contextual essays covering the tintinnabuli works in depth. Stronger than Hillier on the later works and on the reception history. The essay on Passio is particularly useful for understanding how Pärt applies the technique to large-scale sacred form." },
+
+  // — John Adams —
+  { id:"lb_bx_19", topic:"beyond", era:"Contemporary",
+    author:"Kyle Gann", title:"American Music in the Twentieth Century", year:"1997",
+    note:"The best overview of American post-war music including the minimalist tradition and its aftermath. The chapters on Adams situate him precisely: post-minimalist rather than minimalist, using tonal harmonic progressions at radically different time scales and with rhythmic complexity (borrowed from Carter and Nancarrow) that exceeds anything in Reich or Glass. Essential context before engaging Adams's own scores." },
+  { id:"lb_bx_20", topic:"beyond", era:"Contemporary",
+    author:"Rochberg, George et al. (eds.)", title:"The Cambridge Companion to John Adams", year:"2019",
+    note:"Comprehensive coverage of Adams's harmonic language, formal processes, and aesthetic development from Nixon in China through Doctor Atomic. The chapter on harmonic rhythm and tonal reference is the best analytic account of how Adams uses traditional harmonic progressions in a post-minimalist context." },
 
   // — Jazz Theory —
   { id:"lb_bx_11", topic:"jazz", era:"Contemporary",
@@ -1178,7 +1292,7 @@ export default function App() {
               {sidebarOpen && (
                 <div style={{ minWidth: 0 }}>
                   <div className="sb-app-title">Common-Practice Music Theory</div>
-                  <div className="sb-app-sub">Self-Directed Study Program</div>
+                  <div className="sb-app-sub">Self-Directed Study Program · v1.0</div>
                 </div>
               )}
               <button className="sb-toggle" onClick={() => setSidebarOpen(o => !o)} title={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}>
